@@ -1,0 +1,267 @@
+.food-hero {
+  position: relative;
+  height: 500vh;
+}
+
+.food-hero__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  /* svh (small viewport height) excludes mobile browser chrome that can
+     appear/disappear, so the plate never ends up cropped beneath it. */
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+}
+
+.food-hero__backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 50% 62%, rgba(217, 80, 43, 0.22), transparent 70%),
+    radial-gradient(120% 90% at 50% 0%, var(--color-bg-soft), var(--color-bg) 70%);
+}
+
+/* --- Stage: full-bleed scene, ingredients float freely across it -------- */
+
+.food-hero__stage {
+  position: absolute;
+  inset: 0;
+  perspective: 1200px;
+  will-change: transform;
+}
+
+/* --- Plate (CSS placeholder until a transparent plate PNG replaces it) -- */
+
+.food-plate {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--fh-plate-width-d);
+  aspect-ratio: 1 / 1;
+  z-index: 1;
+  will-change: transform;
+}
+
+@media (max-width: 899.98px) {
+  .food-plate {
+    width: var(--fh-plate-width-m);
+  }
+}
+
+.food-plate__rim {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.1), transparent 58%),
+    radial-gradient(
+      circle at 50% 50%,
+      #29241f 0%,
+      #29241f 61%,
+      rgba(243, 234, 217, 0.16) 62%,
+      rgba(243, 234, 217, 0.04) 76%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
+  box-shadow:
+    0 35px 70px rgba(0, 0, 0, 0.55),
+    inset 0 2px 6px rgba(255, 255, 255, 0.07),
+    inset 0 -14px 26px rgba(0, 0, 0, 0.45);
+}
+
+.food-plate__well {
+  position: absolute;
+  inset: 9%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 45%, #1c1815, #100d0b 72%);
+  box-shadow: inset 0 6px 16px rgba(0, 0, 0, 0.55);
+}
+
+/* --- Steam: soft, blurred, screen-blended blobs rising off the plate ---- */
+
+.food-hero__steam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  z-index: 7;
+  pointer-events: none;
+}
+
+.food-hero__steam-puff {
+  position: absolute;
+  top: 0;
+  left: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 246, 230, 0.75) 0%,
+    rgba(255, 246, 230, 0.35) 45%,
+    rgba(255, 246, 230, 0) 72%
+  );
+  filter: blur(5px);
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+/* --- Food items ---------------------------------------------------------- */
+
+.food-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--fh-width-d);
+  will-change: transform;
+}
+
+@media (max-width: 899.98px) {
+  .food-item {
+    width: var(--fh-width-m);
+  }
+}
+
+.food-item__inner {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.45));
+}
+
+/* --- AROMA GRILL wordmark ------------------------------------------------- */
+
+.food-hero__wordmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.food-hero__wordmark-line {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  color: var(--color-cream);
+  white-space: nowrap;
+}
+
+.food-hero__wordmark-line--aroma {
+  font-size: clamp(3.4rem, 15vw, 11rem);
+}
+
+.food-hero__wordmark-line--grill {
+  font-size: clamp(2.6rem, 11.5vw, 8.4rem);
+  color: var(--color-ember-soft);
+}
+
+/* --- Scroll hint (phase 1 only) ------------------------------------------ */
+
+.food-hero__scroll-hint {
+  position: absolute;
+  bottom: min(6vh, 3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.food-hero__scroll-hint span:first-child {
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  color: var(--color-cream-dim);
+}
+
+.food-hero__scroll-hint-line {
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-cream-dim),
+    transparent
+  );
+}
+
+/* --- Brand moment (phase 7): tagline + CTA -------------------------------- */
+
+.food-hero__brand {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 1.5rem min(7vh, 4rem);
+  pointer-events: none;
+  text-align: center;
+}
+
+.food-hero__tagline {
+  font-family: var(--font-body);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-cream-dim);
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+}
+
+.food-hero__cta {
+  pointer-events: auto;
+  margin-top: 1.4rem;
+  position: relative;
+  display: inline-block;
+  padding: 0.9rem 2.2rem;
+  border: 1px solid var(--color-hairline);
+  color: var(--color-cream);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition:
+    border-color 0.4s ease,
+    color 0.4s ease;
+}
+
+.food-hero__cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-ember);
+  transform: translateX(-101%);
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  z-index: -1;
+}
+
+.food-hero__cta:hover,
+.food-hero__cta:focus-visible {
+  border-color: var(--color-ember);
+  color: var(--color-bg);
+}
+
+.food-hero__cta:hover::before,
+.food-hero__cta:focus-visible::before {
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .food-hero__cta {
+    transition: none;
+  }
+  .food-hero__cta::before {
+    transition: none;
+  }
+}

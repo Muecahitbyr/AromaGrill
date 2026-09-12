@@ -1,0 +1,58 @@
+:root {
+  --color-bg: #0f0d0b;
+  --color-bg-soft: #171310;
+  /* Tuned to the Aroma Grill logo's flame gradient (sampled from
+     public/Logo.jpg): a deep red-orange base rising to a lighter amber tip. */
+  --color-ember: #d9502b;
+  --color-ember-soft: #e88a3f;
+  --color-cream: #f3ead9;
+  --color-cream-dim: rgba(243, 234, 217, 0.68);
+  --color-hairline: rgba(243, 234, 217, 0.18);
+
+  --font-display: "Fraunces", "Iowan Old Style", "Georgia", serif;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Lenis takes over smooth scrolling; native scroll stays as fallback. */
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+}

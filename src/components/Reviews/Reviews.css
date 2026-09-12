@@ -1,0 +1,212 @@
+.reviews {
+  position: relative;
+  background: var(--color-bg);
+  padding: min(13vh, 7rem) 0 min(15vh, 8rem);
+  overflow-x: clip;
+}
+
+.reviews__intro {
+  max-width: 40rem;
+  margin: 0 auto min(6vh, 3.5rem);
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.reviews__heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  color: var(--color-cream);
+  margin: 0 0 0.9rem;
+}
+
+.reviews__subline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--color-cream-dim);
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.reviews__subline .stars {
+  font-size: 1.05rem;
+}
+
+/* --- Marquee -------------------------------------------------------------- */
+
+.reviews__marquee {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+.reviews__row {
+  overflow: hidden;
+}
+
+.reviews__track {
+  display: flex;
+  width: max-content;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  padding: 0 clamp(1rem, 2.5vw, 1.5rem);
+  animation: reviews-marquee-left 52s linear infinite;
+  will-change: transform;
+}
+
+.reviews__track--reverse {
+  animation-name: reviews-marquee-right;
+  animation-duration: 62s;
+}
+
+.reviews__track-duplicate {
+  display: contents;
+}
+
+@keyframes reviews-marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes reviews-marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (hover: hover) {
+  .reviews__row:hover .reviews__track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews__track {
+    animation: none;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .reviews__track {
+    animation-duration: 68s;
+  }
+  .reviews__track--reverse {
+    animation-duration: 78s;
+  }
+}
+
+/* --- Card ------------------------------------------------------------------ */
+
+.review-card {
+  flex: none;
+  width: clamp(240px, 30vw, 320px);
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-hairline);
+  border-radius: 2px;
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+@media (max-width: 767.98px) {
+  .review-card {
+    width: 74vw;
+    padding: 1.2rem 1.3rem;
+  }
+}
+
+.review-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.review-card__name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--color-cream);
+}
+
+.review-card__google {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-cream-dim);
+  flex: none;
+}
+
+.review-card__google-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-hairline);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.65rem;
+  color: var(--color-cream-dim);
+}
+
+.review-card__text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--color-cream-dim);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+/* --- Stars (dezent, not garish) --------------------------------------------- */
+
+.stars {
+  position: relative;
+  display: inline-block;
+  font-size: 0.95rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+
+.stars__track,
+.stars__fill {
+  display: block;
+  white-space: nowrap;
+}
+
+.stars__track {
+  color: var(--color-hairline);
+}
+
+.stars__fill {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: var(--color-ember-soft);
+}
